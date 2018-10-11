@@ -27,15 +27,6 @@ RUN apt-get update && \
     pip install scipy scikit-learn && \
     rm -rf /var/lib/apt/lists/*
 
-# Add VS code
-# The download link is from https://code.visualstudio.com/updates
-RUN wget https://vscode-update.azurewebsites.net/1.28.0/linux-deb-x64/stable -O code_amd64.deb && \
-    dpkg -i --force-depends code_amd64.deb && \
-    rm code_amd64.deb && \
-    apt-get update && \
-    apt-get install -y -f && \
-    rm -rf /var/lib/apt/lists/*
-
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES \
     ${NVIDIA_VISIBLE_DEVICES:-all}
