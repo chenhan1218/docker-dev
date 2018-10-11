@@ -2,7 +2,7 @@ ARG USER=chenhan
 ARG UID=1000
 ARG GID=1000
 
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 LABEL Chen-Han Hsiao (Stanley) "chenhan.hsiao.tw@gmail.com"
 
 USER root
