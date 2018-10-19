@@ -1,3 +1,7 @@
+ARG USER=chenhan
+ARG UID=1000
+ARG GID=1000
+
 FROM ubuntu:18.04
 LABEL Chen-Han Hsiao (Stanley) "chenhan.hsiao.tw@gmail.com"
 
@@ -26,6 +30,24 @@ RUN apt-get update && \
     pip3 install yapf && \
     pip install scipy scikit-learn && \
     rm -rf /var/lib/apt/lists/*
+
+# Add custom user
+ARG USER
+ARG UID
+ARG GID
+RUN apt-get update && \
+    apt-get install -y sudo && \
+    rm -rf /var/lib/apt/lists/* && \
+    useradd -m $USER && \
+    echo "$USER:$USER" | chpasswd && \
+    usermod --shell /usr/bin/zsh $USER && \
+    usermod -aG sudo $USER && \
+    echo "$USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$USER && \
+    chmod 0440 /etc/sudoers.d/$USER && \
+    usermod  --uid $UID $USER && \
+    groupmod --gid $GID $USER
+
+USER $USER
 
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES \
