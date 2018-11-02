@@ -31,7 +31,8 @@ docker run -it \
   -v "$XAUTH:$XAUTH" \
   -v "/tmp/.X11-unix:/tmp/.X11-unix" \
   -v "/etc/localtime:/etc/localtime:ro" \
-  -v "$PWD":/root \
+  -v "$PWD"/root:/root \
+  -v "$PWD"/home:/home \
   --privileged \
   "$@" \
   /bin/bash
