@@ -21,11 +21,6 @@ RUN apt-get update && \
     apt-get install -y debian-goodies gtk-recordmydesktop htop iputils-ping ipython ipython3 jq \
     keychain less meld moreutils packaging-dev psmisc python-pip python-pudb python3-pip python3-pudb \
     screen silversearcher-ag sudo tig tmux tree vim virtualenv x11-apps x11-xserver-utils x11vnc xvfb zsh && \
-    apt-get install -y python-wstool python-rosdep ninja-build && \
-    apt-get install -y libgoogle-glog-dev libatlas-base-dev libeigen3-dev libsuitesparse-dev && \
-    apt-get install -y gfortran liblua5.2-dev python-sphinx && \
-    apt-get install -y build-essential zlib1g-dev && \
-    apt-get install -y clang-format && \
     pip3 install pycodestyle && \
     pip3 install yapf && \
     pip install scipy scikit-learn && \
