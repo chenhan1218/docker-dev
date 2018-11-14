@@ -19,8 +19,8 @@ RUN apt-get update && \
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
     apt-get install -y debian-goodies gtk-recordmydesktop htop iputils-ping ipython ipython3 jq \
-    keychain less meld moreutils packaging-dev psmisc python-pip python-pudb python3-pip python3-pudb \
-    screen silversearcher-ag sudo tig tmux tree vim virtualenv x11-apps x11-xserver-utils x11vnc xvfb zsh && \
+    keychain less meld moreutils openbox packaging-dev psmisc python-pip python-pudb python3-pip python3-pudb \
+    screen silversearcher-ag sudo tig tmux tree vim virtualenv x11-apps x11-xserver-utils xcompmgr x11vnc xvfb zsh && \
     pip3 install pycodestyle && \
     pip3 install yapf && \
     pip install scipy scikit-learn && \
