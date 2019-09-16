@@ -1,52 +1,21 @@
-ARG USER=chenhan
-ARG UID=1000
-ARG GID=1000
+FROM maven:3-jdk-8
 
-FROM ubuntu:18.04
-LABEL Chen-Han Hsiao (Stanley) "chenhan.hsiao.tw@gmail.com"
+RUN export CLOUD_SDK_REPO="cloud-sdk-stretch" && \
+    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+    apt-get update -y && apt-get install google-cloud-sdk -y
 
-USER root
+RUN apt-get install google-cloud-sdk-datastore-emulator memcached \
+	net-tools netcat google-cloud-sdk-pubsub-emulator redis-server -y
 
-# For development, do not exclude man pages & other documentation
-RUN rm -f /etc/dpkg/dpkg.cfg.d/excludes
+RUN curl -OL https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz && \
+	tar -C /usr/local -zxf go1.11.1.linux-amd64.tar.gz && \
+	mkdir -p /root/go && \
+	env GOPATH=/root/go /usr/local/go/bin/go get -u go.mozilla.org/iprepd && \
+	env GOPATH=/root/go /usr/local/go/bin/go install go.mozilla.org/iprepd/cmd/iprepd && \
+	mkdir -p /etc/iprepd
 
-# Install common used utils (from education-common meta-package)
-RUN apt-get update && \
-    apt-get install -y apt-listchanges bash-completion bc bind9-host cfengine2 cifs-utils command-not-found convmv cups cups-browsed debconf-utils debian-archive-keyring deborphan dhcping dmidecode eject etherwake ethtool finger foomatic-db foomatic-db-engine fping gdb hddtemp hdparm hpijs-ppds hplip htop hwinfo iftop iotop iproute2 less libnss-myhostname libpam-tmpdir libwww-perl lshw lsscsi man-db manpages mc memtest86+ mlocate mtools mtr ncftp nictools-pci nmap nullidentd openbsd-inetd openssh-client pciutils printer-driver-hpijs printer-driver-pnm2ppa procinfo psmisc python-gtk2 python-vte reportbug rsync rsyslog screen strace sysfsutils tcpdump tcptraceroute traceroute unattended-upgrades valgrind vim wget && \
-    rm -rf /var/lib/apt/lists/*
+COPY docker/iprepd.yaml /etc/iprepd/iprepd.yaml
 
-# Install utils
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
-    apt-get install -y dbus-x11 debian-goodies gtk-recordmydesktop htop iputils-ping ipython ipython3 jq \
-    keychain less meld moreutils openbox packaging-dev psmisc python-pip python-pudb python3-pip python3-pudb \
-    screen silversearcher-ag sudo tig tmux tree vim virtualenv x11-apps x11-xserver-utils xcompmgr x11vnc xvfb zsh && \
-    pip3 install pycodestyle && \
-    pip3 install yapf && \
-    pip install scipy scikit-learn && \
-    rm -rf /var/lib/apt/lists/*
-
-# Add custom user
-ARG USER
-ARG UID
-ARG GID
-RUN apt-get update && \
-    apt-get install -y sudo && \
-    rm -rf /var/lib/apt/lists/* && \
-    useradd -m $USER && \
-    echo "$USER:$USER" | chpasswd && \
-    usermod --shell /usr/bin/zsh $USER && \
-    usermod -aG sudo $USER && \
-    echo "$USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$USER && \
-    chmod 0440 /etc/sudoers.d/$USER && \
-    usermod  --uid $UID $USER && \
-    groupmod --gid $GID $USER
-
-USER $USER
-
-# nvidia-container-runtime
-ENV NVIDIA_VISIBLE_DEVICES \
-    ${NVIDIA_VISIBLE_DEVICES:-all}
-ENV NVIDIA_DRIVER_CAPABILITIES \
-    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
-
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
