@@ -26,6 +26,9 @@ RUN apt-get update && \
     pip install scipy scikit-learn && \
     rm -rf /var/lib/apt/lists/*
 
+# Install airflow
+run pip3 install apache-airflow
+
 # Add custom user
 ARG USER
 ARG UID
