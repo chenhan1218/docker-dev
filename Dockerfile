@@ -2,7 +2,7 @@ ARG USER=chenhan
 ARG UID=1000
 ARG GID=1000
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 LABEL Chen-Han Hsiao (Stanley) "chenhan.hsiao.tw@gmail.com"
 
 USER root
@@ -12,7 +12,7 @@ RUN rm -f /etc/dpkg/dpkg.cfg.d/excludes
 
 # Install common used utils (from education-common meta-package)
 RUN apt-get update && \
-    apt-get install -y apt-listchanges bash-completion bc bind9-host cfengine2 cifs-utils command-not-found convmv cups cups-browsed debconf-utils debian-archive-keyring deborphan dhcping dmidecode eject etherwake ethtool finger foomatic-db foomatic-db-engine fping gdb hddtemp hdparm hpijs-ppds hplip htop hwinfo iftop iotop iproute2 less libnss-myhostname libpam-tmpdir libwww-perl lshw lsscsi man-db manpages mc memtest86+ mlocate mtools mtr ncftp nictools-pci nmap nullidentd openbsd-inetd openssh-client pciutils printer-driver-hpijs printer-driver-pnm2ppa procinfo psmisc python-gtk2 python-vte reportbug rsync rsyslog screen strace sysfsutils tcpdump tcptraceroute traceroute unattended-upgrades valgrind vim wget && \
+    apt-get install -y apt-listchanges bash-completion bc bind9-host cifs-utils command-not-found convmv debconf-utils debian-archive-keyring deborphan dhcping dmidecode etherwake ethtool finger fping gdb hddtemp htop hwinfo iftop iotop iproute2 less libnss-myhostname libpam-tmpdir libwww-perl lshw lsscsi man-db manpages mc memtest86+ mlocate mtools mtr ncftp nictools-pci nmap nullidentd openbsd-inetd openssh-client pciutils procinfo psmisc rsync rsyslog screen smartmontools strace sysfsutils tcpdump tcptraceroute traceroute unattended-upgrades valgrind vim wget && \
     rm -rf /var/lib/apt/lists/*
 
 # Install utils
