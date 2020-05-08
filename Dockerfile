@@ -26,6 +26,13 @@ RUN apt-get update && \
     pip3 install yapf && \
     rm -rf /var/lib/apt/lists/*
 
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install -y yarn && \
+    rm -rf /var/lib/apt/lists/*
+
 # Add custom user
 ARG USER
 ARG UID
