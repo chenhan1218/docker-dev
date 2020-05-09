@@ -12,12 +12,13 @@ RUN rm -f /etc/dpkg/dpkg.cfg.d/excludes
 
 # Install common used utils (from education-common meta-package)
 RUN apt-get update && \
+    ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
+    DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true apt install -y tzdata && \
     apt-get install -y apt-listchanges bash-completion bc bind9-host cifs-utils command-not-found convmv debconf-utils debian-archive-keyring deborphan dhcping dmidecode etherwake ethtool finger fping gdb hddtemp htop hwinfo iftop iotop iproute2 less libnss-myhostname libpam-tmpdir libwww-perl lshw lsscsi man-db manpages mc memtest86+ mlocate mtools mtr ncftp nictools-pci nmap nullidentd openbsd-inetd openssh-client pciutils procinfo psmisc rsync rsyslog screen smartmontools strace sysfsutils tcpdump tcptraceroute traceroute unattended-upgrades valgrind vim wget && \
     rm -rf /var/lib/apt/lists/*
 
 # Install utils
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
     apt-get install -y dbus-x11 debian-goodies gtk-recordmydesktop htop iputils-ping ipython ipython3 jq \
     keychain less meld moreutils openbox packaging-dev psmisc python-pip python-pudb python3-pip python3-pudb \
     screen silversearcher-ag sudo tig tmux tree vim virtualenv x11-apps x11-xserver-utils xcompmgr x11vnc xvfb zsh && \
