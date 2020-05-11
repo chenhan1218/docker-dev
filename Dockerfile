@@ -14,7 +14,7 @@ RUN rm -f /etc/dpkg/dpkg.cfg.d/excludes
 RUN apt-get update && \
     ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
     DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true apt install -y tzdata && \
-    apt-get install -y apt-listchanges bash-completion bc bind9-host cifs-utils command-not-found convmv debconf-utils debian-archive-keyring deborphan dhcping dmidecode etherwake ethtool finger fping gdb hddtemp htop hwinfo iftop iotop iproute2 less libnss-myhostname libpam-tmpdir libwww-perl lshw lsscsi man-db manpages mc memtest86+ mlocate mtools mtr ncftp nictools-pci nmap nullidentd openbsd-inetd openssh-client pciutils procinfo psmisc rsync rsyslog screen smartmontools strace sysfsutils tcpdump tcptraceroute traceroute unattended-upgrades valgrind vim wget && \
+    apt-get install -y apt-listchanges bash-completion bc bind9-host cifs-utils convmv debconf-utils debian-archive-keyring deborphan dhcping dmidecode etherwake ethtool finger fping gdb hddtemp htop hwinfo iftop iotop iproute2 less libnss-myhostname libpam-tmpdir libwww-perl lshw lsscsi man-db manpages mc memtest86+ mlocate mtools mtr ncftp nictools-pci nmap nullidentd openbsd-inetd openssh-client pciutils procinfo psmisc rsync rsyslog screen smartmontools strace sysfsutils tcpdump tcptraceroute traceroute unattended-upgrades valgrind vim wget && \
     rm -rf /var/lib/apt/lists/*
 
 # Install utils
