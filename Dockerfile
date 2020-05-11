@@ -23,7 +23,6 @@ RUN apt-get update && \
     screen silversearcher-ag sudo tig tmux tree vim virtualenv x11-apps x11-xserver-utils xcompmgr x11vnc xvfb zsh && \
     pip3 install pycodestyle && \
     pip3 install yapf && \
-    pip install scipy scikit-learn && \
     rm -rf /var/lib/apt/lists/*
 
 # Add custom user
