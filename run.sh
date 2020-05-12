@@ -37,3 +37,5 @@ docker run -it \
   "$@" \
   /bin/bash
 
+# interactive start a stopped container:
+# docker start -i my_container
