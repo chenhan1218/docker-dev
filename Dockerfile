@@ -19,7 +19,7 @@ RUN apt-get update && \
 
 # Install utils
 RUN apt-get update && \
-    apt-get install -y dbus-x11 debian-goodies recordmydesktop htop iputils-ping ipython3 jq \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y dbus-x11 debian-goodies recordmydesktop htop iputils-ping ipython3 jq \
     keychain less meld moreutils openbox packaging-dev psmisc python3-pip python3-pudb \
     screen silversearcher-ag sudo tig tmux tree vim virtualenv x11-apps x11-xserver-utils xcompmgr x11vnc xvfb zsh && \
     pip3 install pycodestyle && \
