@@ -3,7 +3,7 @@ ARG UID=1000
 ARG GID=1000
 
 FROM ubuntu:20.04
-LABEL Chen-Han Hsiao (Stanley) "chenhan.hsiao.tw@gmail.com"
+LABEL maintainer "Chen-Han Hsiao (Stanley) <chenhan.hsiao.tw@gmail.com>"
 
 USER root
 
