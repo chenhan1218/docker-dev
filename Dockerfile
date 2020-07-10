@@ -2,7 +2,7 @@ ARG USER=chenhan
 ARG UID=1000
 ARG GID=1000
 
-FROM ubuntu:20.04
+FROM debian:buster-backports
 LABEL maintainer "Chen-Han Hsiao (Stanley) <chenhan.hsiao.tw@gmail.com>"
 
 USER root
