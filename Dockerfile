@@ -26,6 +26,9 @@ RUN apt-get update && \
     screen silversearcher-ag sudo tig tmux tree vim virtualenv x11vnc xvfb zsh \
     xauth x11-apps \
     dbus-x11 x11-xserver-utils xcompmgr && \
+    # dependency for teamviewer
+    # TODO
+    apt install -y qml-module-qtquick-controls qml-module-qtquick-dialogs libqt5x11extras5 libqt5webkit5 && \
     pip3 install pycodestyle && \
     pip3 install yapf && \
     rm -rf /var/lib/apt/lists/*
