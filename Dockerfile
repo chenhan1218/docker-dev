@@ -30,6 +30,11 @@ RUN apt-get update && \
     pip3 install yapf && \
     rm -rf /var/lib/apt/lists/*
 
+# add db utils
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y mongodb-clients mysql-client-core-8.0 redis-tools && \
+    rm -rf /var/lib/apt/lists/*
+
 # Add custom user
 ARG USER
 ARG UID
